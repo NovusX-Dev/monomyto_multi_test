@@ -495,6 +495,7 @@ MonoBehaviour:
       m_Action: Movement
       m_Flags: 8
   _movementSpeed: 5
+  _rotateSpeed: 5
 --- !u!50 &1316871526
 Rigidbody2D:
   serializedVersion: 4

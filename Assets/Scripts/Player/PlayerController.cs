@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
 
     private void RotateTowardsMouse()
     {
-        _mousePos = _camera.ScreenToViewportPoint(Input.mousePosition);
+        _mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
         var _lookDirection = _mousePos - transform.position;
         var angle = Mathf.Atan2(_lookDirection.y, _lookDirection.x) * Mathf.Rad2Deg;
         var _rotation = Quaternion.AngleAxis(angle, Vector3.forward);
