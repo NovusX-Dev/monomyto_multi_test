@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] float _bulletSpeed = 2f;
-    [SerializeField] float _bulletDamage = 0.5f;
+    [SerializeField] float _bulletPower = 0.5f;
     [SerializeField] Sprite _bulletSprite = null;
 
     private Vector3 _direction;
@@ -20,6 +20,10 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         Destroy(gameObject, 5f);
+        if(_bulletSprite != null)
+        {
+            GetComponent<SpriteRenderer>().sprite = _bulletSprite;
+        }
     }
 
     void Update()
@@ -35,6 +39,14 @@ public class Bullet : MonoBehaviour
     public void SetBulletDirection(Vector2 direction)
     {
         _forwardDirection = direction;
-        Debug.Log(_forwardDirection);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.GetComponent<IDamagable<float>>() != null)
+        {
+            other.GetComponent<IDamagable<float>>().Damage(_bulletPower);
+            Destroy(gameObject);
+        }
     }
 }
