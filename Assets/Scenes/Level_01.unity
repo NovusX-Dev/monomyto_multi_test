@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 152348421}
   - component: {fileID: 152348422}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Weapon Position
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -178,12 +178,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 152348420}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0.1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1605904072}
-  m_RootOrder: 0
+  m_Father: {fileID: 1316871524}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &152348422
 SpriteRenderer:
@@ -412,6 +412,7 @@ GameObject:
   - component: {fileID: 1316871524}
   - component: {fileID: 1316871526}
   - component: {fileID: 1316871525}
+  - component: {fileID: 1316871527}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -431,6 +432,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1605904072}
+  - {fileID: 152348421}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -517,6 +519,37 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &1316871527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316871523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e1addd67e12a0b4795fba5da80bb930, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _normalAttack:
+    m_Name: Normal Attack
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 58bc6b70-c1ce-4961-ac4d-9131576663bb
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 66cc5bca-0a02-4ff8-af15-91c564a5ecbe
+      m_Path: <Mouse>/leftButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Normal Attack
+      m_Flags: 0
+  _bulletPrefab: {fileID: 8658438830157509287, guid: d75dc06704c02be48a8127baf7544c17, type: 3}
+  _weaponPos: {fileID: 152348421}
+  _fireRate: 0.25
 --- !u!1 &1605904071
 GameObject:
   m_ObjectHideFlags: 0
@@ -544,8 +577,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 152348421}
+  m_Children: []
   m_Father: {fileID: 1316871524}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
