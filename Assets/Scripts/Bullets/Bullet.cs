@@ -12,14 +12,19 @@ public class Bullet : MonoBehaviour
     private Vector3 _forwardDirection;
 
     Rigidbody2D _rb2d;
+
     private void Awake()
     {
         _rb2d = GetComponent<Rigidbody2D>();
     }
 
+    private void OnEnable()
+    {
+        Invoke("Hide", 4f);
+    }
+
     void Start()
     {
-        Destroy(gameObject, 5f);
         if(_bulletSprite != null)
         {
             GetComponent<SpriteRenderer>().sprite = _bulletSprite;
@@ -46,7 +51,12 @@ public class Bullet : MonoBehaviour
         if(other.GetComponent<IDamagable<float>>() != null)
         {
             other.GetComponent<IDamagable<float>>().Damage(_bulletPower);
-            Destroy(gameObject);
+            gameObject.SetActive(false);;
         }
+    }
+
+    private void Hide()
+    {
+        gameObject.SetActive(false);
     }
 }

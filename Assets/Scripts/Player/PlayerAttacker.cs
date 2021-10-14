@@ -32,7 +32,9 @@ public class PlayerAttacker : MonoBehaviour
     {
         if(_normalAttack.ReadValue<float>() > 0.5f && Time.time > _nextFire)
         {
-            var bullet = Instantiate(_bulletPrefab, _weaponPos.position, Quaternion.identity);
+            //var bullet = Instantiate(_bulletPrefab, _weaponPos.position, Quaternion.identity);
+            var bullet = PoolManager.Instance.RequestObject();
+            bullet.transform.position = _weaponPos.position;
             bullet.GetComponent<Bullet>().SetBulletDirection(transform.right);
             _nextFire = Time.time + _fireRate;
         }
