@@ -5,8 +5,16 @@ using UnityEngine;
 public class BreakableBox : MonoBehaviour, IDamagable<float>
 {
     [SerializeField] float _maxHP = 1f;
+    [SerializeField] ParticleSystem _explosionVFX;
 
     private float _currentHP;
+
+    SpriteRenderer _spriteRenderer;
+
+    private void Awake()
+    {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
     private void Start()
     {
@@ -25,6 +33,8 @@ public class BreakableBox : MonoBehaviour, IDamagable<float>
 
         if (_currentHP <= 0)
         {
+            var explosion = Instantiate(_explosionVFX, transform.position, Quaternion.identity);
+            explosion.startColor = _spriteRenderer.color;
             Destroy(gameObject);
         }
     }
