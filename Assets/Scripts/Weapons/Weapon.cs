@@ -23,7 +23,7 @@ public class Weapon : MonoBehaviour
     private void Start()
     {
         if(_weaponSO == null) Debug.LogError("Weapon Scriptable Object is not assigned!");
-        _currentAmmoCount = _weaponSO.startingAmmoCount;
+        AddAmmo();
     }
 
     private void Update()
@@ -57,11 +57,15 @@ public class Weapon : MonoBehaviour
     public void AddAmmo()
     {
         _currentAmmoCount += _weaponSO.ammotPickUpAmount;
-        Debug.Log(_currentAmmoCount);
     }
 
     private string GetBulletTag()
     {
         return _weaponSO.bulletPrefab.GetComponent<Bullet>().GetBulletTag();
+    }
+
+    public int GetWeaponID()
+    {
+        return _weaponSO.weaponID;
     }
 }

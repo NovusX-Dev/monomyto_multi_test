@@ -123,3 +123,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponPickup: {fileID: 6125125196924109534, guid: e6bfdc7045e49a849ba5d134b2c02975, type: 3}
+  _pickupID: 1

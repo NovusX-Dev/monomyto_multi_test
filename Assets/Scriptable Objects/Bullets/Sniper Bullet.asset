@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2cf16a50b354d6429857acb76641252, type: 3}
   m_Name: Sniper Bullet
   m_EditorClassIdentifier: 
-  bulletSpeed: 750
+  _tag: Sniper_Bullet
+  bulletSpeed: 1000
   bulletPower: 1.5
-  bulletID: 2
   bulletSprite: {fileID: 0}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BB Gun SO
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 8658438830157509287, guid: d75dc06704c02be48a8127baf7544c17, type: 3}
-  startingAmmoCount: 100
-  ammotPickUpAmount: 25
+  ammotPickUpAmount: 30
   fireRate: 0.25
   reloadTime: 1
+  weaponID: 1

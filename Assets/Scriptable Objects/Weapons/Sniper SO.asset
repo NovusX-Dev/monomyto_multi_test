@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sniper SO
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 8658438830157509287, guid: 25c8cc612c911684eb321c5de03940a1, type: 3}
-  startingAmmoCount: 20
-  ammotPickUpAmount: 5
+  ammotPickUpAmount: 15
   fireRate: 1
   reloadTime: 2
+  weaponID: 2

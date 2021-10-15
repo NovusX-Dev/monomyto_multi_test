@@ -43,12 +43,29 @@ public class PlayerAttacker : MonoBehaviour
             _nextFire = Time.time + _currentFireRate;
         }
     }
-    public void EquipWeapon(Weapon weapon)
+    public void EquipWeapon(Weapon weapon, int id)
     {
-        _equipedWeapon.gameObject.SetActive(false);
-        _equipedWeapon = weapon;
-        _equipedWeapon.gameObject.SetActive(true);
-        _currentFireRate = weapon.FireRate;
-        weapon.AddAmmo();
+        Debug.Log(weapon.name);
+
+        if(_equipedWeapon.GetWeaponID() == id)
+        {
+            weapon.AddAmmo();
+        }
+        else
+        {
+            _equipedWeapon.gameObject.SetActive(false);
+
+            foreach(var weaponObj in _weaponArray)
+            {
+                if(id == weaponObj.GetWeaponID())
+                {
+                    _equipedWeapon = weaponObj;
+                    _equipedWeapon.gameObject.SetActive(true);
+                    _currentFireRate = weaponObj.FireRate;
+                    weaponObj.AddAmmo();
+                    break;
+                }
+            }
+        }
     }
 }
