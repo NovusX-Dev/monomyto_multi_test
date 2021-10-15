@@ -10,8 +10,6 @@ public class Weapon : MonoBehaviour
     private bool _isEquiped;
     private int _currentAmmoCount;
     private bool _canShoot = true;
-    private bool _isReloading = false;
-    private WaitForSeconds _reloadWait;
 
     public Transform FiringPosition => _firingPosition;
     public float FireRate => _weaponSO.fireRate;
@@ -26,7 +24,6 @@ public class Weapon : MonoBehaviour
     {
         if(_weaponSO == null) Debug.LogError("Weapon Scriptable Object is not assigned!");
         _currentAmmoCount = _weaponSO.startingAmmoCount;
-        _reloadWait = new WaitForSeconds(_weaponSO.reloadTime);
     }
 
     private void Update()
@@ -57,20 +54,10 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    public void ReloadWeapon()
+    public void AddAmmo()
     {
-        if(!_isReloading)
-            StartCoroutine(ReloadWeaponRoutine());
-    }
-
-    IEnumerator ReloadWeaponRoutine()
-    {
-        _isReloading = true;
-        _canShoot = false;
-        yield return _reloadWait;
-        _currentAmmoCount = _weaponSO.startingAmmoCount;
-        _canShoot = true;
-        _isReloading = false;
+        _currentAmmoCount += _weaponSO.ammotPickUpAmount;
+        Debug.Log(_currentAmmoCount);
     }
 
     private string GetBulletTag()

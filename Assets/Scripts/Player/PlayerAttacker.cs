@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerAttacker : MonoBehaviour
 {
-    [SerializeField] InputAction _normalAttack, _reaload;
+    [SerializeField] InputAction _normalAttack;
     
     private float _currentFireRate;
     private float _nextFire = -1;
@@ -15,13 +15,11 @@ public class PlayerAttacker : MonoBehaviour
     private void OnEnable()
     {
         _normalAttack.Enable();
-        _reaload.Enable();
     }
 
     private void OnDisable()
     {
         _normalAttack.Disable();
-        _reaload.Disable();
     }
 
     void Start()
@@ -31,36 +29,26 @@ public class PlayerAttacker : MonoBehaviour
         {
             if(weapon.IsEquiped)
             {
-                EquipWeapon(weapon);
+                _equipedWeapon = weapon;
+                _currentFireRate = weapon.FireRate; ;
             }
         }
     }
 
     void Update()
     {
-        foreach (var weapon in _weaponArray)
-        {
-            if (weapon.IsEquiped)
-            {
-                EquipWeapon(weapon);
-            }
-        }
-
         if (_normalAttack.ReadValue<float>() > 0.5f && Time.time > _nextFire)
         {
             _equipedWeapon.FireWeapon();
             _nextFire = Time.time + _currentFireRate;
         }
-
-        if(_reaload.ReadValue<float>() > 0.5f)
-        {
-            _equipedWeapon.ReloadWeapon();
-        }
     }
-
     public void EquipWeapon(Weapon weapon)
     {
+        _equipedWeapon.gameObject.SetActive(false);
         _equipedWeapon = weapon;
+        _equipedWeapon.gameObject.SetActive(true);
         _currentFireRate = weapon.FireRate;
+        weapon.AddAmmo();
     }
 }
