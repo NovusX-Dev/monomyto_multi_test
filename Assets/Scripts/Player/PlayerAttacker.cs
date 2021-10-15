@@ -45,7 +45,6 @@ public class PlayerAttacker : MonoBehaviour
     }
     public void EquipWeapon(Weapon weapon, int id)
     {
-        Debug.Log(weapon.name);
 
         if(_equipedWeapon.GetWeaponID() == id)
         {
