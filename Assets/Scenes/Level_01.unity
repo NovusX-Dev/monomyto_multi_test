@@ -867,6 +867,22 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Normal Attack
       m_Flags: 0
+  _reaload:
+    m_Name: Reaload
+    m_Type: 1
+    m_ExpectedControlType: Button
+    m_Id: 802e3d43-a3a9-40c8-80b2-b8ab9d3ec796
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 395347cb-aa3d-417e-be26-c1acea871547
+      m_Path: <Keyboard>/r
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Reaload
+      m_Flags: 0
 --- !u!1 &1358841826
 GameObject:
   m_ObjectHideFlags: 0
