@@ -126,7 +126,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f26cb0d76455ac42b1f81cfdf4954b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletPrefab: {fileID: 8658438830157509287, guid: d75dc06704c02be48a8127baf7544c17, type: 3}
   _firingPosition: {fileID: 64596377226955266}
-  _maxAmmoCount: 15
-  _fireRate: 0.25
+  _weaponSO: {fileID: 11400000, guid: 94ec8c5d9a867584999b3a09e695d9c1, type: 2}

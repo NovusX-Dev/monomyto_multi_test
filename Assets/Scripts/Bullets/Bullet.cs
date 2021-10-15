@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] float _bulletSpeed = 2f;
-    [SerializeField] float _bulletPower = 0.5f;
-    [Tooltip("Must be equal to a pool manager ID")] [SerializeField] int _bulletID;
-    [SerializeField] Sprite _bulletSprite = null;
+    [SerializeField] BulletSO _bulletSO;
 
     private Vector3 _forwardDirection;
 
@@ -25,9 +22,11 @@ public class Bullet : MonoBehaviour
 
     void Start()
     {
-        if(_bulletSprite != null)
+        if (_bulletSO == null) Debug.LogError("Bullet Scriptable Object is not assigned!");
+
+        if (_bulletSO.bulletSprite != null)
         {
-            GetComponent<SpriteRenderer>().sprite = _bulletSprite;
+            GetComponent<SpriteRenderer>().sprite = _bulletSO.bulletSprite;
         }
     }
 
@@ -38,7 +37,7 @@ public class Bullet : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rb2d.velocity = _forwardDirection * _bulletSpeed * Time.fixedDeltaTime;
+        _rb2d.velocity = _forwardDirection * _bulletSO.bulletSpeed * Time.fixedDeltaTime;
     }
 
     public void SetBulletDirection(Vector2 direction)
@@ -50,7 +49,7 @@ public class Bullet : MonoBehaviour
     {
         if(other.GetComponent<IDamagable<float>>() != null)
         {
-            other.GetComponent<IDamagable<float>>().Damage(_bulletPower);
+            other.GetComponent<IDamagable<float>>().Damage(_bulletSO.bulletPower);
             gameObject.SetActive(false);;
         }
     }
@@ -62,6 +61,6 @@ public class Bullet : MonoBehaviour
 
     public int GetBulletID()
     {
-        return _bulletID;
+        return _bulletSO.bulletID;
     }
 }
