@@ -6,12 +6,13 @@ using UnityEngine.InputSystem;
 public class PlayerAttacker : MonoBehaviour
 {
     [SerializeField] InputAction _normalAttack;
-    [SerializeField] GameObject _bulletPrefab;
-    [SerializeField] Transform _weaponPos;
     
-    //fire rate will be assigned by the weapon later, remove serialization
-    [SerializeField] private float _fireRate = 0.25f;
+    private float _currentFireRate;
     private float _nextFire = -1;
+    private Transform _currentFiringPosition;
+    private int _currentBulletID;
+    private Weapon[] _weaponArray;
+    private Weapon _equipedWeapon;
 
     private void OnEnable()
     {
@@ -25,18 +26,32 @@ public class PlayerAttacker : MonoBehaviour
 
     void Start()
     {
-        
+        _weaponArray = GetComponentsInChildren<Weapon>();
+        foreach(var weapon in _weaponArray)
+        {
+            if(weapon.IsEquiped)
+            {
+                EquipWeapon(weapon);
+            }
+        }
     }
 
     void Update()
     {
         if(_normalAttack.ReadValue<float>() > 0.5f && Time.time > _nextFire)
         {
-            //var bullet = Instantiate(_bulletPrefab, _weaponPos.position, Quaternion.identity);
-            var bullet = PoolManager.Instance.RequestObject();
-            bullet.transform.position = _weaponPos.position;
+            var bullet = PoolManager.Instance.RequestObject(_currentBulletID);
+            bullet.transform.position = _currentFiringPosition.position;
             bullet.GetComponent<Bullet>().SetBulletDirection(transform.right);
-            _nextFire = Time.time + _fireRate;
+            _nextFire = Time.time + _currentFireRate;
         }
+    }
+
+    public void EquipWeapon(Weapon weapon)
+    {
+        _equipedWeapon = weapon;
+        _currentFireRate = weapon.FireRate;
+        _currentFiringPosition = weapon.FiringPosition;
+        _currentBulletID = weapon.GetBulletID();
     }
 }

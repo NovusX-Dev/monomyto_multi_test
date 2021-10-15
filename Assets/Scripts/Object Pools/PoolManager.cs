@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PoolManager : Singleton<PoolManager>
 {
+    [Tooltip("Must be equal to a butt ID")] [SerializeField] int _poolID;
     [SerializeField] Transform _poolContainer;
     [SerializeField] GameObject _objectPrefab;
     [SerializeField] int _poolCount;
@@ -21,22 +22,23 @@ public class PoolManager : Singleton<PoolManager>
 
         for(int i = 0; i < amount; i++)
         {
-            Debug.Log("0");
             GameObject obj = Instantiate(_objectPrefab);
-            Debug.Log("1");
             obj.transform.parent = _poolContainer;
-            Debug.Log("2");
             obj.SetActive(false);
-            Debug.Log("3");
             _objectPool.Add(obj);
-            Debug.Log("4");
         }
 
         return _objectPool;
     }
 
-    public GameObject RequestObject()
+    public GameObject RequestObject(int iD)
     {
+        if(iD != _poolID) 
+        { 
+            Debug.LogError("IDs do not match");
+            return null;
+        } 
+
         foreach(var obj in _objectPool)
         {
             if(!obj.activeInHierarchy)

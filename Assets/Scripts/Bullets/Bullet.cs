@@ -6,9 +6,9 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] float _bulletSpeed = 2f;
     [SerializeField] float _bulletPower = 0.5f;
+    [Tooltip("Must be equal to a pool manager ID")] [SerializeField] int _bulletID;
     [SerializeField] Sprite _bulletSprite = null;
 
-    private Vector3 _direction;
     private Vector3 _forwardDirection;
 
     Rigidbody2D _rb2d;
@@ -58,5 +58,10 @@ public class Bullet : MonoBehaviour
     private void Hide()
     {
         gameObject.SetActive(false);
+    }
+
+    public int GetBulletID()
+    {
+        return _bulletID;
     }
 }

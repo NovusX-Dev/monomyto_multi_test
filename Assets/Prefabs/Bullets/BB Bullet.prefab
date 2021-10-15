@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 8658438830157509286}
   - component: {fileID: 8658438830157509336}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: BB Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,4 +167,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bulletSpeed: 500
   _bulletPower: 0.5
+  _bulletID: 1
   _bulletSprite: {fileID: 0}
