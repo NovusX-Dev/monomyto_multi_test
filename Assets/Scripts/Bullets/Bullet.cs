@@ -23,6 +23,7 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         if (_bulletSO == null) Debug.LogError("Bullet Scriptable Object is not assigned!");
+        _bulletSO.SetTagString(this.tag);
 
         if (_bulletSO.bulletSprite != null)
         {
@@ -59,8 +60,8 @@ public class Bullet : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public int GetBulletID()
+    public string GetBulletTag()
     {
-        return _bulletSO.bulletID;
+        return this.tag;
     }
 }

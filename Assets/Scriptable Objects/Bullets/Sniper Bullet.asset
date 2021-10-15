@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a92409d4455ec948b18c8d5ec76b1d7, type: 3}
-  m_Name: BB Gun SO
+  m_Script: {fileID: 11500000, guid: a2cf16a50b354d6429857acb76641252, type: 3}
+  m_Name: Sniper Bullet
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 8658438830157509287, guid: d75dc06704c02be48a8127baf7544c17, type: 3}
-  startingAmmoCount: 150
-  fireRate: 0.25
-  reloadTime: 1
+  bulletSpeed: 750
+  bulletPower: 1.5
+  bulletID: 2
+  bulletSprite: {fileID: 0}

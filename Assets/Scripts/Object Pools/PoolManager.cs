@@ -2,56 +2,62 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class ObjectPoolItem
+{
+    public string name;
+    public GameObject objectPrefab;
+    public int objectCount;
+    public bool _shouldExpand;
+}
+
 public class PoolManager : Singleton<PoolManager>
 {
-    [Tooltip("Must be equal to a butt ID")] [SerializeField] int _poolID;
     [SerializeField] Transform _poolContainer;
-    [SerializeField] GameObject _objectPrefab;
-    [SerializeField] int _poolCount;
+    [SerializeField] List<ObjectPoolItem> _objectsToPool;
 
     private List<GameObject> _objectPool;
 
     void Start()
     {
-        _objectPool = GeneratePool(_poolCount);
-    }
-
-    List<GameObject> GeneratePool(int amount)
-    {
         _objectPool = new List<GameObject>();
-
-        for(int i = 0; i < amount; i++)
+        foreach (var item in _objectsToPool)
         {
-            GameObject obj = Instantiate(_objectPrefab);
-            obj.transform.parent = _poolContainer;
-            obj.SetActive(false);
-            _objectPool.Add(obj);
+            for(int i = 0; i < item.objectCount; i++)
+            {
+                GameObject obj = Instantiate(item.objectPrefab);
+                obj.transform.parent = _poolContainer;
+                obj.SetActive(false);
+                _objectPool.Add(obj);
+            }
         }
-
-        return _objectPool;
     }
 
-    public GameObject RequestObject(int iD)
+
+    public GameObject RequestObject(string tag)
     {
-        if(iD != _poolID) 
-        { 
-            Debug.LogError("IDs do not match");
-            return null;
-        } 
 
         foreach(var obj in _objectPool)
         {
-            if(!obj.activeInHierarchy)
+            if(!obj.activeInHierarchy && obj.tag == tag)
             {
                 obj.SetActive(true);
                 return obj;
             }
         }
 
-        var newObj = Instantiate(_objectPrefab);
-        newObj.transform.parent = _poolContainer;
-        _objectPool.Add(newObj);
+        foreach (var item in _objectsToPool)
+        {
+            for (int i = 0; i < item.objectCount; i++)
+            {
+                GameObject newObj = Instantiate(item.objectPrefab);
+                newObj.transform.parent = _poolContainer;
+                _objectPool.Add(newObj);
+                return newObj;
+            }
+        }
 
-        return newObj;
+        return null;
+        
     }
 }

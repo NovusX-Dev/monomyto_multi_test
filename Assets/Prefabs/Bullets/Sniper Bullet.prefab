@@ -95,8 +95,8 @@ GameObject:
   - component: {fileID: 8658438830157509286}
   - component: {fileID: 8658438830157509336}
   m_Layer: 0
-  m_Name: BB Bullet
-  m_TagString: BB_Bullet
+  m_Name: Sniper Bullet
+  m_TagString: Sniper_Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -165,4 +165,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3ff78eba5bafe44888db78c06f314d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletSO: {fileID: 11400000, guid: 098e8c0653f33694ab841d95e8de24f7, type: 2}
+  _bulletSO: {fileID: 11400000, guid: b6bdce54820ece841ae76a4b1453477e, type: 2}

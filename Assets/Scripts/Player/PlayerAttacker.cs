@@ -26,7 +26,7 @@ public class PlayerAttacker : MonoBehaviour
 
     void Start()
     {
-        _weaponArray = GetComponentsInChildren<Weapon>();
+        _weaponArray = GetComponentsInChildren<Weapon>(true);
         foreach(var weapon in _weaponArray)
         {
             if(weapon.IsEquiped)
@@ -38,7 +38,15 @@ public class PlayerAttacker : MonoBehaviour
 
     void Update()
     {
-        if(_normalAttack.ReadValue<float>() > 0.5f && Time.time > _nextFire)
+        foreach (var weapon in _weaponArray)
+        {
+            if (weapon.IsEquiped)
+            {
+                EquipWeapon(weapon);
+            }
+        }
+
+        if (_normalAttack.ReadValue<float>() > 0.5f && Time.time > _nextFire)
         {
             _equipedWeapon.FireWeapon();
             _nextFire = Time.time + _currentFireRate;

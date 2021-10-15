@@ -25,7 +25,7 @@ public class Weapon : MonoBehaviour
     private void Start()
     {
         if(_weaponSO == null) Debug.LogError("Weapon Scriptable Object is not assigned!");
-        _currentAmmoCount = _weaponSO.maxAmmoCount;
+        _currentAmmoCount = _weaponSO.startingAmmoCount;
         _reloadWait = new WaitForSeconds(_weaponSO.reloadTime);
     }
 
@@ -38,7 +38,7 @@ public class Weapon : MonoBehaviour
     {
         if(!_canShoot) return;
 
-        var bullet = PoolManager.Instance.RequestObject(GetBulletID());
+        var bullet = PoolManager.Instance.RequestObject(GetBulletTag());
         bullet.transform.position = _firingPosition.position;
         bullet.GetComponent<Bullet>().SetBulletDirection(transform.right);
 
@@ -68,13 +68,13 @@ public class Weapon : MonoBehaviour
         _isReloading = true;
         _canShoot = false;
         yield return _reloadWait;
-        _currentAmmoCount = _weaponSO.maxAmmoCount;
+        _currentAmmoCount = _weaponSO.startingAmmoCount;
         _canShoot = true;
         _isReloading = false;
     }
 
-    private int GetBulletID()
+    private string GetBulletTag()
     {
-        return _weaponSO.bulletPrefab.GetComponent<Bullet>().GetBulletID();
+        return _weaponSO.bulletPrefab.GetComponent<Bullet>().GetBulletTag();
     }
 }
