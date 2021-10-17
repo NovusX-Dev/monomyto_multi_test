@@ -15,6 +15,9 @@ public class Weapon : MonoBehaviour
     public float FireRate => _weaponSO.fireRate;
     public bool IsEquiped => _isEquiped;
 
+
+    Bullet _bullet;
+
     private void OnEnable()
     {
         _isEquiped = gameObject.activeInHierarchy;
@@ -24,6 +27,7 @@ public class Weapon : MonoBehaviour
     {
         if(_weaponSO == null) Debug.LogError("Weapon Scriptable Object is not assigned!");
         AddAmmo();
+        _bullet = _weaponSO.bulletPrefab.GetComponent<Bullet>();
     }
 
     private void Update()
@@ -61,11 +65,16 @@ public class Weapon : MonoBehaviour
 
     private string GetBulletTag()
     {
-        return _weaponSO.bulletPrefab.GetComponent<Bullet>().GetBulletTag();
+        return _bullet.GetBulletTag();
     }
 
     public int GetWeaponID()
     {
         return _weaponSO.weaponID;
+    }
+
+    public float GetBulletPower()
+    {
+        return _bullet.GetBulletPower();
     }
 }

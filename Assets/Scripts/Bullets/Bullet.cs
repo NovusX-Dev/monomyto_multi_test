@@ -64,4 +64,9 @@ public class Bullet : MonoBehaviour
     {
         return this.tag;
     }
+
+    public float GetBulletPower()
+    {
+        return _bulletSO.bulletPower;
+    }
 }
