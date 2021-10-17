@@ -73,8 +73,18 @@ public class Weapon : MonoBehaviour
         return _weaponSO.weaponID;
     }
 
+    public int GetAmmoCount()
+    {
+        return _currentAmmoCount;
+    }
+
     public float GetBulletPower()
     {
         return _bullet.GetBulletPower();
+    }
+
+    public float SetBulletPower(float power)
+    {
+        return _bullet.SetBulletPower(power);
     }
 }

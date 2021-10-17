@@ -1,9 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BreakableBox : MonoBehaviour, IDamagable<float>
 {
+    public static event Action<int> OnBoxDestroyed;
+
+    [SerializeField] int _scorePoints = 5;
     [SerializeField] float _maxHP = 1f;
     [SerializeField] ParticleSystem _explosionVFX;
     [SerializeField] GameObject[] _pickupPrefabs;
@@ -42,7 +46,9 @@ public class BreakableBox : MonoBehaviour, IDamagable<float>
         var explosion = Instantiate(_explosionVFX, transform.position, Quaternion.identity);
         explosion.startColor = _spriteRenderer.color;
 
-        Instantiate(_pickupPrefabs[Random.Range(0, _pickupPrefabs.Length)], transform.position, Quaternion.identity);
+        Instantiate(_pickupPrefabs[UnityEngine.Random.Range(0, _pickupPrefabs.Length)], transform.position, Quaternion.identity);
+        OnBoxDestroyed?.Invoke(_scorePoints);
+
         Destroy(gameObject);
     }
 }

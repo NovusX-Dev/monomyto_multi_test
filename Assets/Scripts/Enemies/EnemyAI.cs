@@ -20,7 +20,6 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] LayerMask _playersMask;
 
 
-
     private PlayerAttacker _player;
     private Vector3 _targetPosition;
     private float _aggroRange;
@@ -42,7 +41,7 @@ public class EnemyAI : MonoBehaviour
         _aggroRange = _chaseDistance / 1.25f;
 
         _currentFireRate = _equipedWeapon.FireRate * _fireRateMultiplier;
-        _currentGunPower = _equipedWeapon.GetBulletPower() * _gunPowerMultiplier;
+        _currentGunPower = _equipedWeapon.SetBulletPower(_equipedWeapon.GetBulletPower() * _gunPowerMultiplier);
     }
 
     void Update()
@@ -50,7 +49,16 @@ public class EnemyAI : MonoBehaviour
         var _visiblePlayers = Physics2D.CircleCast(transform.position, _chaseDistance, Vector2.right, _chaseDistance, _playersMask);
         _playerVisible = _visiblePlayers.point != Vector2.zero ? true : false;
 
-        _player = _playerVisible ? _visiblePlayers.collider.GetComponent<PlayerAttacker>() : null;
+        //_player = _playerVisible ? _visiblePlayers.collider.GetComponent<PlayerAttacker>() : null;
+        if(_playerVisible)
+        {
+            if(_visiblePlayers.collider.GetComponent<PlayerAttacker>() != null)
+                _player = _visiblePlayers.collider.GetComponent<PlayerAttacker>();
+        }
+        else
+        {
+            _player = null;
+        }
 
         switch (_states)
         {
@@ -80,7 +88,6 @@ public class EnemyAI : MonoBehaviour
         {
             RotateEnemy((Vector3)_targetPosition);
         }
-
     }
 
     private void IdleState()
@@ -138,7 +145,7 @@ public class EnemyAI : MonoBehaviour
             _states = States.Shoot;
         }
 
-        if (Vector3.Distance(transform.position, _player.transform.position) > (_chaseDistance + 0.5f))
+        if (Vector3.Distance(transform.position, _player.transform.position) > (_chaseDistance + 0.5f) || _player == null)
         {
             _states = States.Idle;
         }
@@ -153,7 +160,6 @@ public class EnemyAI : MonoBehaviour
 
         if(Time.time > _nextFire)
         {
-            
             _equipedWeapon.FireWeapon();
             _nextFire = Time.time + _currentFireRate;
         }

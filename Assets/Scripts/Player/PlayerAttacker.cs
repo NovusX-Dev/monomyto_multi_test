@@ -33,6 +33,7 @@ public class PlayerAttacker : MonoBehaviour
                 _currentFireRate = weapon.FireRate; ;
             }
         }
+        UIManager.Instance.UpdateGunAmmoUI(_equipedWeapon, _equipedWeapon.GetAmmoCount());
     }
 
     void Update()
@@ -40,15 +41,16 @@ public class PlayerAttacker : MonoBehaviour
         if (_normalAttack.ReadValue<float>() > 0.5f && Time.time > _nextFire)
         {
             _equipedWeapon.FireWeapon();
+            UIManager.Instance.UpdateGunAmmoUI(_equipedWeapon, _equipedWeapon.GetAmmoCount());
             _nextFire = Time.time + _currentFireRate;
         }
     }
     public void EquipWeapon(Weapon weapon, int id)
     {
-
+       
         if(_equipedWeapon.GetWeaponID() == id)
         {
-            weapon.AddAmmo();
+            _equipedWeapon.AddAmmo();
         }
         else
         {
@@ -66,5 +68,7 @@ public class PlayerAttacker : MonoBehaviour
                 }
             }
         }
+
+        UIManager.Instance.UpdateGunAmmoUI(_equipedWeapon, _equipedWeapon.GetAmmoCount());
     }
 }

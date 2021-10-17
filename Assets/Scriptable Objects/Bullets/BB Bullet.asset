@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2cf16a50b354d6429857acb76641252, type: 3}
   m_Name: BB Bullet
   m_EditorClassIdentifier: 
-  bulletSpeed: 500
-  bulletPower: 0.5
-  bulletID: 1
+  _tag: BB_Bullet
+  bulletSpeed: 600
+  bulletPower: 0.75
   bulletSprite: {fileID: 0}

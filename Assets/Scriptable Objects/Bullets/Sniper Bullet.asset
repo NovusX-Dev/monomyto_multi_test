@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Sniper Bullet
   m_EditorClassIdentifier: 
   _tag: Sniper_Bullet
-  bulletSpeed: 1000
-  bulletPower: 1.5
+  bulletSpeed: 1150
+  bulletPower: 2
   bulletSprite: {fileID: 0}

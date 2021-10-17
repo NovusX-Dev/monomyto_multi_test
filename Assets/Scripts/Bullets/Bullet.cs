@@ -7,6 +7,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] BulletSO _bulletSO;
 
     private Vector3 _forwardDirection;
+    private float _currentBulletPower;
 
     Rigidbody2D _rb2d;
 
@@ -29,6 +30,8 @@ public class Bullet : MonoBehaviour
         {
             GetComponent<SpriteRenderer>().sprite = _bulletSO.bulletSprite;
         }
+
+        _currentBulletPower = _bulletSO.bulletPower;
     }
 
     void Update()
@@ -50,7 +53,7 @@ public class Bullet : MonoBehaviour
     {
         if(other.GetComponent<IDamagable<float>>() != null)
         {
-            other.GetComponent<IDamagable<float>>().Damage(_bulletSO.bulletPower);
+            other.GetComponent<IDamagable<float>>().Damage(_currentBulletPower);
             gameObject.SetActive(false);;
         }
     }
@@ -68,5 +71,10 @@ public class Bullet : MonoBehaviour
     public float GetBulletPower()
     {
         return _bulletSO.bulletPower;
+    }
+
+    public float SetBulletPower(float newPower)
+    {
+        return _currentBulletPower = newPower;
     }
 }
