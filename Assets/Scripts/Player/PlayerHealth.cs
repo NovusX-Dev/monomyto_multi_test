@@ -26,7 +26,8 @@ public class PlayerHealth : MonoBehaviour, IDamagable<float>
         if (_currentHealth < 0)
         {
             _currentHealth = 0f;
-            Destroy(gameObject);
+            UIManager.Instance.GameOverPanel();
+            gameObject.SetActive(false);
         }
 
         UIManager.Instance.UpdateHealthUI(_currentHealth, _maxHealth);

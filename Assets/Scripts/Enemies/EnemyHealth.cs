@@ -9,9 +9,19 @@ public class EnemyHealth : MonoBehaviour, IDamagable<float>
 
     [SerializeField] float _maxHealth = 20f;
     [SerializeField] int _scorePoints = 30;
-
+    [SerializeField] ParticleSystem _deathVFX;
 
     private float _currentHealth;
+    private bool _isDead;
+
+    public bool IsDead => _isDead;
+
+    Animator _animController;
+
+    private void Awake()
+    {
+        _animController = GetComponent<Animator>();
+    }
 
     void Start()
     {
@@ -26,12 +36,21 @@ public class EnemyHealth : MonoBehaviour, IDamagable<float>
     public void Damage(float amount)
     {
         _currentHealth -= amount;
+        _animController.SetTrigger("damaged");
+
 
         if( _currentHealth < 0 )
         {
             OnEmenyKilledPoints.Invoke(_scorePoints);
-            Destroy(gameObject);
+            _isDead = true;
+             GetComponent<Collider2D>().enabled = false;
+            _animController.SetBool("isDead", _isDead);
         }
-        
+    }
+
+    public void DeathEvent()
+    {
+        Instantiate(_deathVFX, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 }

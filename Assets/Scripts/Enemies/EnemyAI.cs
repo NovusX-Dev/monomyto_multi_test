@@ -34,6 +34,12 @@ public class EnemyAI : MonoBehaviour
     private float _currentFireRate;
     private float _nextFire = -1;
 
+    EnemyHealth _enemyHealth;
+
+    private void Awake()
+    {
+        _enemyHealth = GetComponent<EnemyHealth>();
+    }
 
     void Start()
     {
@@ -46,6 +52,9 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
+
+        if(_enemyHealth.IsDead) return;
+
         var _visiblePlayers = Physics2D.CircleCast(transform.position, _chaseDistance, Vector2.right, _chaseDistance, _playersMask);
         _playerVisible = _visiblePlayers.point != Vector2.zero ? true : false;
 

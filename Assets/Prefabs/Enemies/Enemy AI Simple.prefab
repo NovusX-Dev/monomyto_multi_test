@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 7657167992061895300}
   - component: {fileID: 7657167992061895323}
   - component: {fileID: 7657167992061895322}
+  - component: {fileID: 8451296102358882692}
   - component: {fileID: 7657167992061895321}
   - component: {fileID: 1260638366}
   m_Layer: 0
@@ -155,6 +156,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!95 &8451296102358882692
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7657167992061895320}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9712c33366b34b344b9efd0717e3ba3f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &7657167992061895321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,7 +209,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4803d6b3d06cff4f93ba05d80e7b2db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 20
+  _maxHealth: 10
+  _scorePoints: 30
+  _deathVFX: {fileID: 4941012711195404263, guid: 0ebb1cb2eaf9d4940b92d12b4f52c1ee, type: 3}
 --- !u!1001 &7657167992009660557
 PrefabInstance:
   m_ObjectHideFlags: 0
